@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尹氏集团网站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ddd;
+        }
+        
+        .navbar-right {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .auth-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: #45a049;
+        }
+        
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #555;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .about-text {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        /* 卡片样式 */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 表单样式 */
+        .form-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .error-message {
+            color: #f44336;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .form-switch a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .form-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* GitHub Auth样式 */
+        .github-auth-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .github-btn {
+            background-color: #24292e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .github-btn:hover {
+            background-color: #2b3137;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+            }
+            
+            .nav-links li {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .navbar-right {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">尹氏集团</div>
+        <ul class="nav-links">
+            <li><a href="#" id="home-link">首页</a></li>
+            <li><a href="#" id="partners-link">合作伙伴</a></li>
+        </ul>
+        <div class="navbar-right">
+            <button id="login-btn" class="auth-btn">登录</button>
+            <button id="register-btn" class="auth-btn">注册</button>
+            <button id="logout-btn" class="auth-btn" style="display: none;">退出登录</button>
+        </div>
+    </nav>
+    
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 首页内容 -->
+        <div id="home-page" class="page">
+            <h1>尹氏集团网站</h1>
+            <h2>关于我们</h2>
+            <p class="about-text">我们的网站成立于2025年9月7日</p>
+        </div>
+        
+        <!-- 合作伙伴内容 -->
+        <div id="partners-page" class="page" style="display: none;">
+            <h1>合作伙伴</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h3>刘瀚哲</h3>
+                    <p>合作伙伴</p>
+                </div>
+                <div class="card">
+                    <h3>宋梓宸</h3>
+                    <p>合作伙伴</p>
+                </div>
+                <div class="card">
+                    <h3>李欣悦</h3>
+                    <p>合作伙伴</p>
+                </div>
+                <div class="card">
+                    <h3>吴欣怡</h3>
+                    <p>合作伙伴</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 登录表单 -->
+        <div id="login-form" class="form-container" style="display: none;">
+            <h2>用户登录</h2>
+            <form id="login-form-element">
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" placeholder="请输入用户名">
+                    <div id="login-username-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" placeholder="请输入密码">
+                    <div id="login-password-error" class="error-message"></div>
+                </div>
+                <button type="submit" class="submit-btn">登录</button>
+                <div class="form-switch">
+                    还没有账号？<a href="#" id="switch-to-register">立即注册</a>
+                </div>
+            </form>
+            
+            <!-- GitHub登录选项 -->
+            <div class="github-auth-container">
+                <p>或使用GitHub账号登录</p>
+                <button id="github-login-btn" class="github-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    登录GitHub账号
+                </button>
+            </div>
+        </div>
+        
+        <!-- 注册表单 -->
+        <div id="register-form" class="form-container" style="display: none;">
+            <h2>用户注册</h2>
+            <form id="register-form-element">
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" placeholder="请输入用户名">
+                    <div id="register-username-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" placeholder="请输入密码">
+                    <div id="register-password-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">确认密码</label>
+                    <input type="password" id="register-confirm-password" placeholder="请再次输入密码">
+                    <div id="register-confirm-password-error" class="error-message"></div>
+                </div>
+                <button type="submit" class="submit-btn">注册</button>
+                <div class="form-switch">
+                    已有账号？<a href="#" id="switch-to-login">立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // 配置信息 - 需要根据实际情况修改
+        const CONFIG = {
+            // GitHub API配置
+            GITHUB_REPO_OWNER: 'your-username', // GitHub用户名
+            GITHUB_REPO_NAME: 'user-data',     // 存储用户数据的仓库名
+            GITHUB_API_TOKEN: '',              // GitHub API Token (生产环境应使用后端代理)
+            // 文件路径
+            USER_DATA_FILE: 'users.json',      // 存储用户数据的文件
+            LOG_FILE: 'login-logs.json'        // 存储登录日志的文件
+        };
+        
+        // 当前认证状态
+        let currentUser = null;
+        
+        // 获取DOM元素
+        const pages = document.querySelectorAll('.page');
+        const homePage = document.getElementById('home-page');
+        const partnersPage = document.getElementById('partners-page');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        
+        const homeLink = document.getElementById('home-link');
+        const partnersLink = document.getElementById('partners-link');
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const githubLoginBtn = document.getElementById('github-login-btn');
+        
+        const loginFormElement = document.getElementById('login-form-element');
+        const registerFormElement = document.getElementById('register-form-element');
+        
+        // 页面切换函数
+        function showPage(pageToShow) {
+            // 隐藏所有页面和表单
+            pages.forEach(page => page.style.display = 'none');
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'none';
+            
+            // 显示选中的页面
+            pageToShow.style.display = 'block';
+        }
+        
+        // 显示登录表单
+        function showLoginForm() {
+            pages.forEach(page => page.style.display = 'none');
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+        }
+        
+        // 显示注册表单
+        function showRegisterForm() {
+            pages.forEach(page => page.style.display = 'none');
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        }
+        
+        // 处理GitHub API请求的函数
+        async function githubApiRequest(method, path, data = null) {
+            const headers = {
+                'Accept': 'application/vnd.github.v3+json',
+            };
+            
+            // 如果有API令牌，添加认证头
+            if (CONFIG.GITHUB_API_TOKEN) {
+                headers['Authorization'] = `token ${CONFIG.GITHUB_API_TOKEN}`;
+            }
+            
+            const options = {
+                method,
+                headers
+            };
+            
+            // 如果有数据，添加到请求体
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+            
+            try {
+                const url = `https://api.github.com/repos/${CONFIG.GITHUB_REPO_OWNER}/${CONFIG.GITHUB_REPO_NAME}/${path}`;
+                const response = await fetch(url, options);
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API请求失败: ${response.status} ${response.statusText}`);
+                }
+                
+                // 对于204 No Content响应，直接返回null
+                if (response.status === 204) {
+                    return null;
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('GitHub API请求错误:', error);
+                throw error;
+            }
+        }
+        
+        // 获取用户数据
+        async function getUsersData() {
+            try {
+                // 尝试获取用户数据文件
+                const fileData = await githubApiRequest('GET', `contents/${CONFIG.USER_DATA_FILE}`);
+                
+                // 解码base64内容
+                const content = atob(fileData.content);
+                return JSON.parse(content);
+            } catch (error) {
+                // 如果文件不存在，返回空对象
+                console.log('用户数据文件不存在，将创建新文件');
+                return {};
+            }
+        }
+        
+        // 保存用户数据
+        async function saveUsersData(usersData) {
+            try {
+                let sha = null;
+                
+                // 尝试获取现有文件的SHA（用于更新）
+                try {
+                    const existingFile = await githubApiRequest('GET', `contents/${CONFIG.USER_DATA_FILE}`);
+                    sha = existingFile.sha;
+                } catch (error) {
+                    // 文件不存在，不需要SHA
+                }
+                
+                // 准备文件内容
+                const content = btoa(JSON.stringify(usersData));
+                
+                // 保存文件
+                await githubApiRequest('PUT', `contents/${CONFIG.USER_DATA_FILE}`, {
+                    message: '更新用户数据',
+                    content: content,
+                    ...(sha && { sha })
+                });
+                
+                return true;
+            } catch (error) {
+                console.error('保存用户数据失败:', error);
+                return false;
+            }
+        }
+        
+        // 添加登录日志
+        async function addLoginLog(username) {
+            try {
+                let logs = [];
+                
+                // 尝试获取现有日志
+                try {
+                    const logFile = await githubApiRequest('GET', `contents/${CONFIG.LOG_FILE}`);
+                    const content = atob(logFile.content);
+                    logs = JSON.parse(content);
+                } catch (error) {
+                    // 日志文件不存在，将创建新文件
+                }
+                
+                // 添加新日志
+                logs.push({
+                    username,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                    ip: 'unknown' // 在客户端无法获取真实IP
+                });
+                
+                // 只保留最近1000条日志
+                if (logs.length > 1000) {
+                    logs = logs.slice(-1000);
+                }
+                
+                // 保存日志
+                const content = btoa(JSON.stringify(logs));
+                
+                await githubApiRequest('PUT', `contents/${CONFIG.LOG_FILE}`, {
+                    message: '添加登录日志',
+                    content: content
+                });
+            } catch (error) {
+                console.error('保存登录日志失败:', error);
+            }
+        }
+        
+        // 处理登录成功
+        function handleLoginSuccess(username) {
+            console.log('登录成功', username);
+            
+            // 设置当前用户
+            currentUser = username;
+            
+            // 保存到localStorage以便在页面刷新后保持登录状态
+            localStorage.setItem('currentUser', username);
+            
+            // 隐藏登录/注册按钮，显示退出按钮
+            loginBtn.style.display = 'none';
+            registerBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+            
+            // 添加登录日志
+            addLoginLog(username);
+            
+            // 返回首页
+            showPage(homePage);
+            alert('登录成功！');
+        }
+        
+        // 处理登出
+        function handleLogout() {
+            // 清除当前用户
+            currentUser = null;
+            
+            // 从localStorage中移除
+            localStorage.removeItem('currentUser');
+            
+            // 显示登录/注册按钮，隐藏退出按钮
+            loginBtn.style.display = 'inline-block';
+            registerBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            
+            alert('已成功登出！');
+        }
+        
+        // 检查登录状态
+        function checkLoginStatus() {
+            // 从localStorage获取当前用户
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = savedUser;
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+            }
+        }
+        
+        // 事件监听
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(homePage);
+        });
+        
+        partnersLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(partnersPage);
+        });
+        
+        loginBtn.addEventListener('click', showLoginForm);
+        registerBtn.addEventListener('click', showRegisterForm);
+        logoutBtn.addEventListener('click', handleLogout);
+        
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterForm();
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+        
+        // GitHub登录按钮
+        githubLoginBtn.addEventListener('click', () => {
+            alert('GitHub OAuth登录需要在GitHub设置中配置OAuth应用，这需要服务器端支持。\n\n在实际应用中，您需要：\n1. 在GitHub中注册OAuth应用\n2. 实现服务器端认证流程\n3. 获取用户信息并更新用户数据');
+        });
+        
+        // 登录表单提交
+        loginFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            const usernameError = document.getElementById('login-username-error');
+            const passwordError = document.getElementById('login-password-error');
+            
+            // 重置错误信息
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // 简单验证
+            let isValid = true;
+            
+            if (!username) {
+                usernameError.textContent = '请输入用户名';
+                usernameError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!password) {
+                passwordError.textContent = '请输入密码';
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                try {
+                    // 获取用户数据
+                    const usersData = await getUsersData();
+                    
+                    // 检查用户名是否存在
+                    if (!usersData[username]) {
+                        usernameError.textContent = '用户名不存在';
+                        usernameError.style.display = 'block';
+                        return;
+                    }
+                    
+                    // 检查密码是否正确
+                    // 注意：在实际应用中，应该使用更安全的密码存储方式
+                    if (usersData[username].password !== password) {
+                        passwordError.textContent = '密码错误';
+                        passwordError.style.display = 'block';
+                        return;
+                    }
+                    
+                    // 登录成功
+                    handleLoginSuccess(username);
+                } catch (error) {
+                    console.error('登录失败:', error);
+                    alert('登录失败，请重试！');
+                }
+            }
+        });
+        
+        // 注册表单提交
+        registerFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            const usernameError = document.getElementById('register-username-error');
+            const passwordError = document.getElementById('register-password-error');
+            const confirmPasswordError = document.getElementById('register-confirm-password-error');
+            
+            // 重置错误信息
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            confirmPasswordError.style.display = 'none';
+            
+            // 简单验证
+            let isValid = true;
+            
+            if (!username) {
+                usernameError.textContent = '请输入用户名';
+                usernameError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!password) {
+                passwordError.textContent = '请输入密码';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = '密码长度不能少于6位';
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = '两次输入的密码不一致';
+                confirmPasswordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                try {
+                    // 获取用户数据
+                    const usersData = await getUsersData();
+                    
+                    // 检查用户名是否已存在
+                    if (usersData[username]) {
+                        usernameError.textContent = '用户名已存在';
+                        usernameError.style.display = 'block';
+                        return;
+                    }
+                    
+                    // 创建新用户
+                    usersData[username] = {
+                        password: password, // 注意：在实际应用中应该使用加密存储
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    // 保存用户数据
+                    const success = await saveUsersData(usersData);
+                    
+                    if (success) {
+                        alert('注册成功！');
+                        showLoginForm();
+                    } else {
+                        alert('注册失败，请重试！');
+                    }
+                } catch (error) {
+                    console.error('注册失败:', error);
+                    alert('注册失败，请重试！');
+                }
+            }
+        });
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(homePage);
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
